@@ -82,10 +82,11 @@ class ActivityTest < Test::Unit::TestCase
   end
 
   def test_data_default
-    activity = JustReturnActivitySelf(c: 'c')
+    activity = JustReturnActivitySelf(a: 'aa', c: 'c')
 
-    assert_equal activity.a, 'a'
+    assert_equal activity.a, 'aa'
     assert_equal activity.b, 'b'
+    assert_equal activity.c, 'c'
     assert_equal activity.d, nil
   end
 
