@@ -1,6 +1,17 @@
 module Ground
   class Activity
     attr_reader :data
+
+    def self.inherited(subclass)
+      return if Kernel.method_defined? subclass.name
+      
+      Kernel.class_eval %Q{
+        def #{subclass.name}(data = {})
+          #{subclass.name}.new(data).call
+        end
+      }
+      
+    end
     
     def self.<< data
       new(data).call
