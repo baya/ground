@@ -52,6 +52,12 @@ class JustReturnActivitySelf < Ground::Activity
   def call
     self
   end
+
+  def foo
+    get_or_set :foo do
+      'foo'
+    end
+  end
   
 end
 
@@ -66,7 +72,7 @@ class ActivityTest < Test::Unit::TestCase
     assert C::D()
 
     assert A << {}
-    assert B::A << {}
+    assert B::A << {} 
     assert B::H << {}
     assert C::A << {}
     assert C::D << {}
@@ -94,6 +100,13 @@ class ActivityTest < Test::Unit::TestCase
     activity = JustReturnActivitySelf(a: 'a')
 
     assert_equal activity.name, 'name'
+  end
+
+  def test_get_or_set
+    activity = JustReturnActivitySelf()
+
+    assert_equal activity.foo, 'foo'
+    assert_equal activity.instance_variable_get(:@foo), 'foo'
   end
   
 end

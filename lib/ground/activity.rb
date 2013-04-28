@@ -13,7 +13,7 @@ module Ground
       
     end
     
-    def self.<< data
+    def self.<<(data = {})
       new(data).call
     end
 
