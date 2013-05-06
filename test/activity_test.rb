@@ -40,7 +40,6 @@ class C
   end
 end
 
-
 class JustReturnActivitySelf < Ground::Activity
   data_reader :a, :b, :c, :d
 
@@ -63,7 +62,6 @@ end
 
 class ActivityTest < Test::Unit::TestCase
 
-
   def test_capital_method
     assert A()
     assert B::A()
@@ -71,11 +69,26 @@ class ActivityTest < Test::Unit::TestCase
     assert C::A()
     assert C::D()
 
+    assert A     a: 'a', b: 'b'
+    assert B::A  a: 'a', b: 'b'
+    assert C::D  a: 'a', b: 'b'
+    assert C::A  a: 'a', b: 'b'
+    assert C::D  a: 'a', b: 'b'
+
     assert A << {}
     assert B::A << {} 
     assert B::H << {}
     assert C::A << {}
     assert C::D << {}
+    
+  end
+
+  def test_class
+    assert A.new({}).is_a? A
+    assert B::A.new({}).is_a? B::A
+    assert C::D.new({}).is_a? C::D
+    assert C::A.new({}).is_a? C::A
+    assert C::D.new({}).is_a? C::D
   end
 
   def test_data_reader
@@ -108,5 +121,5 @@ class ActivityTest < Test::Unit::TestCase
     assert_equal activity.foo, 'foo'
     assert_equal activity.instance_variable_get(:@foo), 'foo'
   end
-  
+
 end
