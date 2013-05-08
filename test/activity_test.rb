@@ -37,6 +37,12 @@ class C
     def call
       true
     end
+
+    class E < D
+      def call
+        true
+      end
+    end
   end
 end
 
@@ -80,6 +86,8 @@ class ActivityTest < Test::Unit::TestCase
     assert B::H << {}
     assert C::A << {}
     assert C::D << {}
+    assert C::D::E << {}
+    assert C::D::E << {a: 'a', b: 'b'}
     
   end
 

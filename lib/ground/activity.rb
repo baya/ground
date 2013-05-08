@@ -6,10 +6,13 @@ module Ground
       return if Kernel.method_defined? subclass.name
       
       Kernel.class_eval %Q{
-        def #{subclass.name}(data = {})
-          #{subclass.name}.new(data).call
+        def #{subclass.name}(data = {}, &p)
+          #{subclass.name}.new(data).call(&p)
         end
       }
+
+    rescue SyntaxError
+  
       
     end
     
