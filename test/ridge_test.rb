@@ -15,7 +15,6 @@ module Ground
     
   end
 
-  
 end
 
 BooksIndex = Ground::Ridge(path: '/books') do
@@ -25,27 +24,19 @@ BooksIndex = Ground::Ridge(path: '/books') do
 end
 
 BookShow = Ground::Ridge(path: '/book/:id') do
+  set :view, 'books/show'
 end
 
-BookCreate = Ground::Ridge(path: '/book', verb: 'post')
-
-class BookCreate
-  data_reader :name, :price, :isbn
-
+BookCreate = Ground::Ridge(path: '/book', verb: 'post') do
   def call
-  end
-  
-end
-
-class BookCreate
-  def call
+    true
   end
 end
 
 class RidgeTest < Test::Unit::TestCase
 
   def test_route
-    puts BookCreate.ancestors
+    assert BookCreate << {name: 'name'}
   end
   
 end
