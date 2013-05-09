@@ -46,6 +46,12 @@ class C
   end
 end
 
+class F < C::A
+  def call
+    true
+  end
+end
+
 class JustReturnActivitySelf < Ground::Activity
   data_reader :a, :b, :c, :d
 
@@ -70,6 +76,7 @@ class ActivityTest < Test::Unit::TestCase
 
   def test_capital_method
     assert A()
+    assert F()
     assert B::A()
     assert C::D()
     assert C::A()

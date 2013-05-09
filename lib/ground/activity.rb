@@ -11,7 +11,7 @@ module Ground
         end
       }
 
-    rescue SyntaxError
+    rescue SyntaxError, TypeError
   
       
     end
