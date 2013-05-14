@@ -55,9 +55,6 @@ end
 class JustReturnActivitySelf < Ground::Activity
   data_reader :a, :b, :c, :d
 
-  data_default :a, 'a'
-  data_default :b, 'b'
-
   set :name, 'name'
 
   def call
@@ -113,15 +110,6 @@ class ActivityTest < Test::Unit::TestCase
     assert_equal activity.b, 'b'
     assert_equal activity.c, 'c'
     assert_equal activity.d, 'd'
-  end
-
-  def test_data_default
-    activity = JustReturnActivitySelf(a: 'aa', c: 'c')
-
-    assert_equal activity.a, 'aa'
-    assert_equal activity.b, 'b'
-    assert_equal activity.c, 'c'
-    assert_equal activity.d, nil
   end
 
   def test_set

@@ -1,12 +1,14 @@
+# -*- coding: utf-8 -*-
 require 'test_helper'
+require 'rack/request'
+require 'rack/response'
+require 'rack'
 
 module Ground
   
   class Ridge < Activity
 
     data_reader :path, :verb
-    data_default :verb, 'GET'
-
 
     class << self
 
@@ -18,7 +20,6 @@ module Ground
       end
 
     end
-
     
     def call(&p)
       activity = Class.new(Activity)
@@ -41,20 +42,25 @@ module Ground
 
 end
 
-BooksIndex = Ground::Ridge(path: '/books') do
+
+BooksIndex = Ground::Ridge(path: '/books', verb: 'get') do
   def call
     @books = ['book1', 'book2', 'book3']
   end
 end
 
-BookShow = Ground::Ridge(path: '/book/:id') do
+BookShow = Ground::Ridge(path: '/book/:id', verb: 'get') do
   set :view, 'books/show'
 end
 
 BookCreate = Ground::Ridge(path: '/book', verb: 'post') do
+
+  data_reader :name, :price, :isbn
+  
   def call
     true
   end
+  
 end
 
 class RidgeTest < Test::Unit::TestCase
@@ -66,3 +72,52 @@ class RidgeTest < Test::Unit::TestCase
   end
   
 end
+
+
+class ComputeLocation < Ground::Activity
+  data_reader :verb, :path
+
+  def call
+    "%s:@:%s" % [verb, path]
+  end
+  
+end
+
+class CreateApp < Ground::Activity
+  data_reader :name
+
+  def call
+    Class.new do
+      def call(env)
+        req = Rack::Request.new(env)
+        location = ComputeLocation verb: req.request_method, path: req.path_info
+        res = Rack::Response.new
+        books = Ground::Ridge.routes[location] << {}
+        books.each {|book|
+          res.write "<h2>#{book}</h2>"
+        }
+        res.finish
+      end
+    end
+  end
+  
+end
+
+BookStore = CreateApp(name: '网络书店')
+
+class StartServer < Ground::Activity
+
+  data_reader :app, :port
+
+  def call
+    Rack::Server.start(app: app.new, Port: port)
+  end
+  
+end
+
+StartServer app: BookStore, port: 9393
+
+
+
+
+

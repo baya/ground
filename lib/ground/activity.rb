@@ -21,15 +21,16 @@ module Ground
     end
 
     def self.data_reader *attrs
+      
       attrs.each do |attr|
-        define_method(attr) { data[attr]}
+        define_method attr do
+          instance_variable_get("@#{attr}") || \
+          instance_variable_set("@#{attr}", data[attr.to_sym])
+        end
       end
+      
     end
-
-    def self.data_default attr, default
-      define_method(attr) { data[attr] || default}
-    end
-
+    
     def self.set name, value
       define_method(name) { value }
     end
