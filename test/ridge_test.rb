@@ -116,13 +116,39 @@ class StartApp < Ground::Activity
 
   data_reader :app, :port
 
-  def call
-    Rack::Server.start(app: app.new, Port: port)
+  attr_reader :middlewares
+
+  def initialize(data)
+    super
+    @middlewares = []
+  end
+
+  def call(&p)
+    instance_eval &p
+    app = pack_middlewares_to_app
+    Rack::Server.start(app: app, Port: port)
+  end
+
+  private
+
+  def use(mid)
+    @middlewares << mid
+  end
+
+  def pack_middlewares_to_app
+    app_with_middlewares = app.new
+    middlewares.reverse.each {|mid|
+      app_with_middlewares = mid.new(app_with_middlewares)
+    }
+    app_with_middlewares
   end
   
 end
 
-StartApp app: BookStore, port: 9393
+StartApp app: BookStore, port: 9393 do
+  use Rack::ShowExceptions
+  use Rack::Lint
+end
 
 
 
