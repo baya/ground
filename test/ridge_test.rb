@@ -43,9 +43,21 @@ module Ground
 end
 
 
-BooksIndex = Ground::Ridge(path: '/books', verb: 'get') do
+BooksIndex = Ground::Ridge(path: '/books', verb: 'get')
+
+class BooksIndex
+  
+  data_reader :request
+  
   def call
     @books = ['book1', 'book2', 'book3']
+    res = Rack::Response.new
+    res['Content-type'] = 'text/html'
+    @books.each {|book|
+      res.write "<h2>#{book}</h2>"
+    }
+    res.finish
+    res
   end
 end
 
@@ -91,12 +103,7 @@ class CreateApp < Ground::Activity
       def call(env)
         req = Rack::Request.new(env)
         location = ComputeLocation verb: req.request_method, path: req.path_info
-        res = Rack::Response.new
-        books = Ground::Ridge.routes[location] << {}
-        books.each {|book|
-          res.write "<h2>#{book}</h2>"
-        }
-        res.finish
+        res = Ground::Ridge.routes[location] << {request: req}
       end
     end
   end
@@ -105,7 +112,7 @@ end
 
 BookStore = CreateApp(name: '网络书店')
 
-class StartServer < Ground::Activity
+class StartApp < Ground::Activity
 
   data_reader :app, :port
 
@@ -115,7 +122,7 @@ class StartServer < Ground::Activity
   
 end
 
-StartServer app: BookStore, port: 9393
+StartApp app: BookStore, port: 9393
 
 
 
