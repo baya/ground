@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module Ground
 
 
@@ -10,8 +11,12 @@ module Ground
           req = Rack::Request.new(env)
           location = Ground::ComputeLocation(verb: req.request_method,
                                              path: req.path_info)
+
+          activity = location[1]
+
+          raise "#{req.path_info}访问路径不存在" if activity == 0
           
-          Ground::Ridge.routes[location] << {env: env}
+          activity << {env: env}
         end
       end
     end

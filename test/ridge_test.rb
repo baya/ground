@@ -4,16 +4,17 @@ require 'rack/request'
 require 'rack/response'
 require 'rack'
 
-BooksIndex = Ground::Ridge(path: '/books', verb: 'get')
+SiteIndex = Ground::Ridge(path: '/', verb: 'get')
 BookShow = Ground::Ridge(path: '/book/:id', verb: 'get')
+BooksIndex = Ground::Ridge(path: '/books', verb: 'get')
+BookTags = Ground::Ridge(path: '/book/:id/tags', verb: 'get')
 BookCreate = Ground::Ridge(path: '/book', verb: 'post')
 
 class RidgeTest < Test::Unit::TestCase
 
   def test_routes
-    assert Ground::Ridge.routes['GET:@:/books']    == BooksIndex
-    assert Ground::Ridge.routes['GET:@:/book/:id'] == BookShow
-    assert Ground::Ridge.routes['POST:@:/book']    == BookCreate
+    puts Ground::Ridge.routes['GET'].inspect
+    puts Ground::Ridge.routes['POST'].inspect
   end
   
 end
