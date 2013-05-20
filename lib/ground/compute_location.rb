@@ -27,7 +27,6 @@ module Ground
       
     end
 
-
   end
   
 end

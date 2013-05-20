@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 module Ground
 
-
   class CreateApp < Activity
     data_reader :name
 
