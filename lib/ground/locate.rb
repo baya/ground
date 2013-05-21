@@ -1,6 +1,6 @@
 module Ground
-
-  class ComputeLocation < Activity
+  
+  class Locate < Activity
     data_reader :verb, :path
 
     def initialize(data)

@@ -8,8 +8,8 @@ module Ground
       Class.new do
         def call(env)
           req = Rack::Request.new(env)
-          location = Ground::ComputeLocation(verb: req.request_method,
-                                             path: req.path_info)
+          location = Ground::Locate(verb: req.request_method,
+                                    path: req.path_info)
 
           activity = location[1]
 

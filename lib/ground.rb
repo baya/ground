@@ -1,6 +1,6 @@
 require 'dun'
 require 'ground/activity'
 require 'ground/ridge'
+require 'ground/locate'
 require 'ground/create_app'
 require 'ground/start_app'
-require 'ground/compute_location'
