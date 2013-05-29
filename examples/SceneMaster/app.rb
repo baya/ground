@@ -17,5 +17,4 @@ SenceMaster = Ground::CreateApp(name: '场景大师')
 Ground::StartApp app: SenceMaster, port: 9393 do
   use Rack::ShowExceptions
   use Rack::CommonLogger
-  use Rack::Lint
 end
