@@ -13,8 +13,8 @@ BookCreate = Ground::Ridge(path: '/book', verb: 'post')
 class RidgeTest < Test::Unit::TestCase
 
   def test_routes
-    puts Ground::Ridge.routes['GET'].inspect
-    puts Ground::Ridge.routes['POST'].inspect
+    assert_equal Ground::Ridge.routes['GET'], [["/", SiteIndex], ["/book/:id", BookShow], ["/books", BooksIndex], ["/book/:id/tags", BookTags]]
+    assert_equal Ground::Ridge.routes['POST'], [["/book", BookCreate]]
   end
   
 end
