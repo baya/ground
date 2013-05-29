@@ -10,7 +10,6 @@ require 'rack'
 require 'haml'
 require 'tilt'
 require 'scene/index'
-require 'aui/css'
 
 
 SenceMaster = Ground::CreateApp(name: '场景大师')

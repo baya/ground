@@ -8,14 +8,13 @@ module Ground
       Class.new do
         def call(env)
           req = Rack::Request.new(env)
-          location = Ground::Locate(verb: req.request_method,
-                                    path: req.path_info)
+          location = Ground::Locate(verb: req.request_method, path: req.path_info)
 
-          activity = location[1]
+          raise "#{req.path_info}访问路径不存在" if location.nil?
 
-          raise "#{req.path_info}访问路径不存在" if activity.nil?
+          route, activity = location
           
-          activity << {env: env}
+          activity << {env: env, route: route}
         end
       end
     end
