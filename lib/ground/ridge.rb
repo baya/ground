@@ -9,30 +9,14 @@ module Ground
 
       attr_reader :routes
 
-      # 路由节点的结构 [name, activity, [sub_node_1, sub_node_2, sub_node_3, ...]]
+      # 路由节点的结构 [path, activity]
       def route(verb, path, activity)
         
         if @routes.nil?
-          @routes = {'GET' => [['/', 0, []]], 'POST' => [['/', 0, []]]}
+          @routes = {'GET' => [], 'POST' => []}
         end
 
-        names = path.split('/')
-        names[0] = '/'
-        route_nodes = @routes[verb]
-        
-        names.each_with_index {|name, index|
-          node = route_nodes.detect {|node| node[0] == name }
-          
-          if node
-            node[1] = activity if index == names.size - 1
-            route_nodes = node[2] 
-          else
-            a = index == names.size - 1 ? activity : 0
-            node = [name, a, []]
-            route_nodes << node
-            route_nodes = node[2]
-          end
-        }
+        @routes[verb] << [path, activity]
         
       end
 

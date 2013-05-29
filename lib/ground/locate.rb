@@ -9,24 +9,25 @@ module Ground
     end
 
     def call
-      names = path.split('/')
-      names[0] = '/'
-      route_nodes = Ridge.routes[verb]
-      node = []
-
-      names.each {|name, index|
-        node = route_nodes.detect {|node| node[0] == name }
-        if node
-          route_nodes = node[2]
-        end
+      path_segs = path.split('/')
+      path_segs[0] = '/'
+      match = false
+      
+      length_match_routes = Ridge.routes[verb].select {|route|
+        route[0].split('/').size == path_segs.size
       }
 
-      node = [] if node.nil?
+      length_match_routes.detect {|route|
+        segs = route[0].split('/')
+        segs[0] = '/'
+        segs.each_with_index {|seg, index|
+          match = (path_segs[index] == seg)  if not seg =~ /^:\w+/
+        }
+        match
+      }
 
-      node
-      
     end
 
-  end
+  end #Locate
   
-end
+end #Ground

@@ -13,7 +13,7 @@ module Ground
 
           activity = location[1]
 
-          raise "#{req.path_info}访问路径不存在" if activity == 0
+          raise "#{req.path_info}访问路径不存在" if activity.nil?
           
           activity << {env: env}
         end
