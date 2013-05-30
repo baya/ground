@@ -9,14 +9,14 @@ module Ground
 
       attr_reader :routes
 
-      # 路由节点的结构 [path, activity]
-      def route(verb, path, activity)
+      # 路由节点的结构 [path, resource]
+      def route(verb, path, resource)
         
         if @routes.nil?
           @routes = {'GET' => [], 'POST' => []}
         end
 
-        @routes[verb] << [path, activity]
+        @routes[verb] << [path, resource]
         
       end
 
@@ -28,16 +28,16 @@ module Ground
     end
 
     def call(&p)
-      activity = Class.new(Activity)
-      route(activity)
-      activity.class_eval &p if block_given?
-      activity
+      resource = Class.new(Resource)
+      route(resource)
+      resource.class_eval &p if block_given?
+      resource
     end
 
     private
 
-    def route(activity)
-      self.class.route(verb, path, activity)
+    def route(resource)
+      self.class.route(verb, path, resource)
     end
 
   end
