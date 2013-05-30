@@ -12,9 +12,9 @@ module Ground
 
           raise "#{req.path_info}访问路径不存在" if location.nil?
 
-          route, activity = location
+          route, resource = location
           
-          activity << {env: env, route: route}
+          resource << {env: env, route: route}
         end
       end
     end
