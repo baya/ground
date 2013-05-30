@@ -9,8 +9,13 @@ require 'ground'
 require 'rack'
 require 'haml'
 require 'tilt'
+require 'sequel'
 require 'scene/index'
+require 'scene/new'
+require 'scene/create'
+require 'create_scene'
 
+DB = Sequel.connect('postgres://pgsql:@localhost/SceneMaster_development')
 
 SenceMaster = Ground::CreateApp(name: '场景大师')
 

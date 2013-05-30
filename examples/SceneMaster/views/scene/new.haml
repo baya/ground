@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %title Scene Master
+  %body{class: ''}
+    %div
+      %h2 创建场景
+      %form{action: '/scene', method: 'post'}
+        %p
+          %label 场景名
+          %input{type: 'text', name: 'scene[name]'}
+        %p
+          %label 场景描述
+          %textarea{name: 'scene[description]'}  
+        %p
+          %input{type: 'submit', value: '提交'}
+        
+    
+  
