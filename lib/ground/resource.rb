@@ -13,7 +13,7 @@ module Ground
         route.split('/').each_with_index {|route_seg, index|
           p[route_seg.sub(':', '')] = path_segs[index] if route_seg =~ /^:\w+/
         }
-        p.merge(request.params)
+        HashWithDoubleAccess p.merge(request.params)
       end
     end
 

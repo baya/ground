@@ -1,4 +1,5 @@
 class CreateScene < Ground::Activity
+  
   data_reader :name, :description
 
   def call

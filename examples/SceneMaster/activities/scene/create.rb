@@ -4,8 +4,8 @@ module Scene
   class Create
 
     def call
-      scene = params['scene']
-      CreateScene << {name: scene['name'], description: scene['description']}
+      puts params.inspect
+      CreateScene params[:scene]
     end
     
   end
