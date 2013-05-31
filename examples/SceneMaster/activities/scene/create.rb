@@ -4,8 +4,8 @@ module Scene
   class Create
 
     def call
-      puts params.inspect
       CreateScene params[:scene]
+      redirect '/scenes'
     end
     
   end

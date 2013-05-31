@@ -7,7 +7,7 @@ module Scene
     def call
       response['Content-Type'] = 'text/html; charset=UTF-8'
       @scenes = find_last_scenes(3)
-      response.write(template.render(Object.new, :scenes => @scenes))
+      response.write(template.render)
       response.finish
     end
 

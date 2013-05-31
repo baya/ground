@@ -25,6 +25,12 @@ module Ground
       @response ||= ::Rack::Response.new
     end
 
+    def redirect(target, status = 302)
+      response.status = status
+      response['Location'] = target
+      response
+    end
+
   end
   
 end

@@ -4,8 +4,8 @@ class HashWithDoubleAccess < Ground::Activity
     double_h = {}
     data.each {|k, v|
       if v.is_a?(Hash)
-        double_h[k.to_sym] = access(v, &:to_sym)
-        double_h[k.to_s] =  access(v, &:to_s)
+        double_h[k.to_sym] = access_with(v, :to_sym)
+        double_h[k.to_s] =  access_with(v, :to_s)
       else
         double_h[k.to_sym] = double_h[k.to_s] =  v
       end
@@ -16,12 +16,11 @@ class HashWithDoubleAccess < Ground::Activity
 
   private
   
-  def access(h)
+  def access_with(h, m)
     tmp_h = {}
     h.each {|k, v|
-      v = access(v) if v.is_a? Hash
-      k = yield k
-      tmp_h[k] = v
+      v = access_with(v, m) if v.is_a? Hash
+      tmp_h[k.send(m)] = v
     }
     tmp_h
   end

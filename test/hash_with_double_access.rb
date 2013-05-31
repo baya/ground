@@ -7,7 +7,6 @@ class HashWithDoubleAccessTest < Test::Unit::TestCase
 
     hd = HashWithDoubleAccess h
 
-    puts hd.inspect
     assert_equal hd[:a], 1
     assert_equal hd['a'], 1
     assert_equal hd['c']['d'], 4
