@@ -2,21 +2,21 @@
 module Ground
 
   class CreateApp < Activity
-    data_reader :name
+    data_reader :name, :config
 
     def call
-      Class.new do
-        def call(env)
-          req = Rack::Request.new(env)
-          location = Ground::Locate(verb: req.request_method, path: req.path_info)
-
-          raise "#{req.path_info}访问路径不存在" if location.nil?
-
-          route, resource = location
-          
-          resource << {env: env, route: route}
-        end
+      _config = config
+      app = Class.new
+      app.send(:define_method, :call) do |env|
+        req = Rack::Request.new(env)
+        location = Ground::Locate(verb: req.request_method, path: req.path_info)
+        route, resource = location
+        
+        resource << {env: env, route: route, config: _config}
       end
+
+      app
+      
     end
     
   end

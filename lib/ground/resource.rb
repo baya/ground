@@ -1,8 +1,10 @@
 module Ground
   
   class Resource < Activity
+
+    include Ground::Protocol::Render
     
-    data_reader :env, :route
+    data_reader :env, :route, :config
 
     class << self
       
@@ -45,6 +47,10 @@ module Ground
       response.status = status
       response['Location'] = target
       response
+    end
+
+    def views
+      config.views
     end
 
   end
