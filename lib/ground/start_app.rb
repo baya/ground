@@ -4,8 +4,6 @@ module Ground
 
     data_reader :app, :port
 
-    attr_reader :middlewares
-
     def initialize(data)
       super
       @middlewares = []
@@ -19,14 +17,14 @@ module Ground
 
     private
 
-    def use(middleware)
-      @middlewares << middleware
+    def use(middleware, *args, &p)
+      @middlewares << lambda {|app| middleware.new(app, *args, &p)}
     end
 
     def pack_middlewares_to_app
       app_with_middlewares = app.new
-      middlewares.reverse.each {|middleware|
-        app_with_middlewares = middleware.new(app_with_middlewares)
+      @middlewares.reverse.each {|middleware|
+        app_with_middlewares = middleware.call(app_with_middlewares)
       }
       app_with_middlewares
     end
