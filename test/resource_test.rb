@@ -4,7 +4,7 @@ BookShow = Ground::Ridge(path: '/book/:id', verb: 'get')
 BooksIndex = Ground::Ridge(path: '/books', verb: 'get')
 BookTags = Ground::Ridge(path: '/book/:id/tags', verb: 'get')
 BookCreate = Ground::Ridge(path: '/book', verb: 'post')
-Tag = Ground::Ridge(path: '/book/:book_id/tag/:tag_id', verb: 'get')
+BookTag = Ground::Ridge(path: '/book/:book_id/tag/:tag_id', verb: 'get')
 
 class ResourceTest < Test::Unit::TestCase
 
@@ -13,7 +13,7 @@ class ResourceTest < Test::Unit::TestCase
     assert_equal BookShow.path(1), '/book/1'
     assert_equal BookTags.path(2), '/book/2/tags'
     assert_equal BookCreate.path, '/book'
-    assert_equal Tag.path(1,2), '/book/1/tag/2'
+    assert_equal BookTag.path(1,2), '/book/1/tag/2'
   end
 
 end
