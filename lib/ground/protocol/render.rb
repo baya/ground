@@ -14,5 +14,11 @@ module Ground::Protocol
       response.finish
     end
 
+    def text(content)
+      response['Content-Type'] = 'text/html; charset=UTF-8'
+      response.write(content)
+      response.finish
+    end
+
   end
 end

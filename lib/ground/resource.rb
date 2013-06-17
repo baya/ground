@@ -43,6 +43,10 @@ module Ground
       @response ||= ::Rack::Response.new
     end
 
+    def session
+      @session ||= request.session
+    end
+
     def redirect(target, status = 302)
       response.status = status
       response['Location'] = target
