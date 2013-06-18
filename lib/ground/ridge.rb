@@ -3,20 +3,20 @@ module Ground
   
   class Ridge < Activity
 
-    data_reader :path, :verb
+    data_reader :path, :verb, :state
 
     class << self
 
       attr_reader :routes
 
-      # 路由节点的结构 [path, resource]
-      def route(verb, path, resource)
+      # 路由节点的结构 [path, state]
+      def route(verb, path, state)
         
         if @routes.nil?
           @routes = {'GET' => [], 'POST' => []}
         end
 
-        @routes[verb] << [path, resource]
+        @routes[verb] << [path, state]
         
       end
 
@@ -27,17 +27,14 @@ module Ground
       @verb = verb.upcase
     end
 
-    def call(&p)
-      resource = Class.new(Resource)
-      route(resource)
-      resource.class_eval &p if block_given?
-      resource
+    def call
+      route(state)
     end
 
     private
 
-    def route(resource)
-      self.class.route(verb, path, resource)
+    def route(state)
+      self.class.route(verb, path, state)
     end
 
   end

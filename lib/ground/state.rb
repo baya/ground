@@ -1,6 +1,6 @@
 module Ground
   
-  class Resource < Activity
+  class State < Activity
 
     include Ground::Protocol::Render
     
