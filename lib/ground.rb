@@ -11,5 +11,13 @@ require 'ground/config'
 require 'ground/create_app'
 require 'ground/start_app'
 
-extend Ground::Protocol::Verb
+if not Kernel.method_defined?('Ground')
+  Kernel.class_eval do
+    def Ground(&p)
+      Ground.instance_eval &p
+    end
+  end
+end
+
+Ground.extend Ground::Protocol::Verb
 
