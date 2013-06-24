@@ -1,4 +1,5 @@
 require 'dun'
+require 'rack'
 require 'ground/activity'
 require 'ground/protocol/render'
 require 'ground/ridge'
