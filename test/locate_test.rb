@@ -1,13 +1,24 @@
 require 'test_helper'
 
-BooksIndex = Ground::Ridge(verb: 'get', path: '/books')
-BookShow = Ground::Ridge(verb: 'get', path: '/book/:id')
-BookComments = Ground::Ridge(verb: 'post', path: '/book/:id/comments')
-UserNotes = Ground::Ridge(verb: 'get', path: '/:username/notes')
+Index = Class.new
+BooksIndex = Class.new
+BookShow = Class.new
+BookComments = Class.new
+UserNotes = Class.new
+
+Ground::Ridge(verb: 'get', path: '/', state: Index)
+Ground::Ridge(verb: 'get', path: '/book/:id', state: BookShow)
+Ground::Ridge(verb: 'get', path: '/books', state: BooksIndex)
+Ground::Ridge(verb: 'post', path: '/book/:id/comments', state: BookComments)
+Ground::Ridge(verb: 'get', path: '/:username/notes', state: UserNotes)
+
 
 class LocateTest < Test::Unit::TestCase
 
   def test_verb_path
+    location = Ground::Locate(verb: 'get', path: '/')
+    assert_equal location, ['/', Index]
+    
     location = Ground::Locate(verb: 'get', path: '/books')
     assert_equal location, ['/books', BooksIndex]
 
