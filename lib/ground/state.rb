@@ -3,6 +3,7 @@ module Ground
   class State < Activity
 
     include Ground::Protocol::Render
+    include Ground::Protocol::Render::Template
     
     data_reader :env, :route, :config
 
