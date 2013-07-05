@@ -5,7 +5,7 @@ module Ground::Protocol
     Ridge = Ground::Ridge
 
     def help(*args, &p)
-      if args.first == :all
+      if args.first == :all_states
         help *Ridge.states, &p
       else
         args.each {|obj|
