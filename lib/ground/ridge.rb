@@ -7,16 +7,16 @@ module Ground
 
     class << self
 
-      attr_reader :routes
+      attr_reader :routes, :states
 
       # 路由节点的结构 [path, state]
       def route(verb, path, state)
-        
-        if @routes.nil?
-          @routes = {'GET' => [], 'POST' => []}
-        end
 
+        @routes ||= {'GET' => [], 'POST' => []}
+        @states ||= []
+        
         @routes[verb] << [path, state]
+        @states << state if not @states.include?(state)
         
       end
 

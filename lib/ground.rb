@@ -5,6 +5,7 @@ require 'ground/protocol/render'
 require 'ground/protocol/render/template'
 require 'ground/ridge'
 require 'ground/protocol/verb'
+require 'ground/protocol/helper'
 require 'ground/locate'
 require 'ground/state'
 require 'ground/validate'
@@ -22,4 +23,6 @@ if not Kernel.method_defined?('Ground')
 end
 
 Ground.extend Ground::Protocol::Verb
+Ground.extend Ground::Protocol::Helper
+
 
