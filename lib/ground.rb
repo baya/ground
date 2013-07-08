@@ -12,7 +12,6 @@ require 'ground/validate'
 require 'ground/hash_with_double_access'
 require 'ground/config'
 require 'ground/create_app'
-require 'ground/start_app'
 
 if not Kernel.method_defined?('Ground')
   Kernel.class_eval do
