@@ -23,8 +23,8 @@ if not Kernel.method_defined?('Ground')
 end
 
 module Ground
-  extend Ground::Protocol::Verb
-  extend Ground::Protocol::Helper
+  extend Protocol::Verb
+  extend Protocol::Helper
 end
 
 
