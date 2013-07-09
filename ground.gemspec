@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name            = "groud"
+  s.name            = "ground"
   s.version         = "0.0.1"
   s.platform        = Gem::Platform::RUBY
   s.summary         = "foot on the ground"
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.author          = 'guimin jiang'
   s.email           = 'kayak.jiang@gmail.com'
 
-  s.add_development_dependency 'dun'
-  s.add_development_dependency 'rack'
+  s.add_dependency 'dun'
+  s.add_dependency 'rack'
 end
 

@@ -14,6 +14,6 @@ Gem::Specification.new do |s|
   s.author          = 'guimin jiang'
   s.email           = 'kayak.jiang@gmail.com'
 
-  s.add_development_dependency 'dun'
-  s.add_development_dependency 'rack'
+  s.add_dependency 'dun'
+  s.add_dependency 'rack'
 end
