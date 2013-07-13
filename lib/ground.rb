@@ -13,14 +13,6 @@ require 'ground/hash_with_double_access'
 require 'ground/config'
 require 'ground/create_app'
 
-if not Kernel.method_defined?('Ground')
-  Kernel.class_eval do
-    def Ground(&p)
-      Ground.instance_eval &p
-    end
-  end
-end
-
 module Ground
   extend Protocol::Verb
   extend Protocol::Helper
@@ -37,5 +29,14 @@ module Ground
   end
   
 end
+
+if not Kernel.method_defined?('Ground')
+  Kernel.class_eval do
+    def Ground(&p)
+      Ground.instance_eval &p
+    end
+  end
+end
+
 
 
