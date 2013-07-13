@@ -27,10 +27,10 @@ module Ground
 
   class << self
     
-    MetalG = self
+    MetaG = self
     
     def set(attr, value)
-      MetalG.class_eval { attr_reader attr }
+      MetaG.class_eval { attr_reader attr }
       instance_variable_set "@#{attr}", value
     end
     
