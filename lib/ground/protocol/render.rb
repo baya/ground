@@ -20,15 +20,15 @@ module Ground::Protocol
     end
 
     def forbid(content = nil)
-      response_as 403
+      response_as 403, content
     end
 
     def not_accept(content = nil)
-      response_as 406
+      response_as 406, content
     end
 
     def unauthorized(content = nil)
-      response_as 401
+      response_as 401, content
     end
 
     private

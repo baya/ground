@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 module Ground
 
-  class CreateApp < Activity
-    data_reader :name, :config
+  class CreateApplication < Activity
+    data_reader :name
 
     def initialize(data)
       super
@@ -10,14 +10,13 @@ module Ground
     end
 
     def call(&p)
-      _config = config
       app = Class.new
       app.send(:define_method, :call) do |env|
         req = Rack::Request.new(env)
         location = Ground::Locate(verb: req.request_method, path: req.path_info)
-        route, resource = location
+        route, state = location
         
-        resource << {env: env, route: route, config: _config}
+        state << {env: env, route: route}
       end
 
       instance_eval &p
@@ -38,7 +37,6 @@ module Ground
       }
       app_with_middlewares
     end
-
     
   end
 

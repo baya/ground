@@ -3,7 +3,7 @@ module Ground::Protocol
     module Template
 
       def haml(path, &p)
-        template = Tilt::HamlTemplate.new(File.join(views, "#{path}.haml"))
+        template = Tilt::HamlTemplate.new(File.join(Ground.views, "#{path}.haml"))
         template.render self, &p
       end
 
