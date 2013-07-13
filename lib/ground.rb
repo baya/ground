@@ -24,6 +24,18 @@ end
 module Ground
   extend Protocol::Verb
   extend Protocol::Helper
+
+  class << self
+    
+    MetalG = self
+    
+    def set(attr, value)
+      MetalG.class_eval { attr_reader attr }
+      instance_variable_set "@#{attr}", value
+    end
+    
+  end
+  
 end
 
 
