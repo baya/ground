@@ -10,23 +10,9 @@ module Ground
     end
 
     def call(&p)
-      app = Class.new
-      app.send :include, Ground::Protocol::Log
-      app.send(:define_method, :call) do |env|
-        began_at = Time.now
-        req = Rack::Request.new(env)
-        location = Ground::Locate(verb: req.request_method, path: req.path_info)
-        route, state = location
-        response = state << {env: env, route: route}
-
-        log began_at, req, state, response
-        
-        response
-      end
-
+      app = Class.new(Ground::BaseRack)
       instance_eval &p
       app_with_middlewares = pack_middlewares_to_app app
-
     end
 
     private

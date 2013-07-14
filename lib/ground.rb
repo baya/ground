@@ -10,6 +10,7 @@ require 'ground/protocol/log'
 require 'ground/locate'
 require 'ground/state'
 require 'ground/validate'
+require 'ground/base_rack'
 require 'ground/hash_with_double_access'
 require 'ground/create_application'
 

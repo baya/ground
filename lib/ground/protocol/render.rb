@@ -31,6 +31,12 @@ module Ground::Protocol
       response_as 401, content
     end
 
+    def redirect(target, status = 302)
+      response.status = status
+      response['Location'] = target
+      response.finish
+    end
+
     private
 
     def response_as(status, content=nil)
