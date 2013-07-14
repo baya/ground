@@ -6,7 +6,7 @@ module Ground::Protocol
 
     def help(*args, &p)
       if args.first == :all_states
-        help *Ridge.states, &p
+        help Ground::State, &p
       else
         args.each {|obj|
           obj.class_eval &p if block_given?
