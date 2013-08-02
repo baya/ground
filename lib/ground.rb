@@ -19,7 +19,7 @@ module Ground
   extend Protocol::Helper
 
   class << self
-    
+
     MetaG = self
     
     def set(attr, value)
