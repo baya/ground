@@ -50,7 +50,7 @@ module Ground
     end
 
     def non_found_state
-      Rack::Response.new(["NO FOUND: #{request_method} #{path_info}"], 403)
+      Rack::Response.new(["Not Found: #{request_method} #{path_info}"], 404)
     end
     
   end
