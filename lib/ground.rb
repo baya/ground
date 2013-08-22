@@ -6,13 +6,14 @@ require 'ground/protocol/render/template'
 require 'ground/ridge'
 require 'ground/protocol/verb'
 require 'ground/protocol/helper'
-require 'ground/protocol/log'
+require 'ground/log'
 require 'ground/locate'
 require 'ground/state'
 require 'ground/validate'
 require 'ground/base_rack'
 require 'ground/hash_with_double_access'
 require 'ground/create_application'
+
 
 module Ground
   extend Protocol::Verb
