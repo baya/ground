@@ -12,6 +12,15 @@ module Ground::Protocol
         template.render self, &p
       end
 
+      def erb(file, &p)
+        template = ERB.new(File.read(File.join(Ground.root, file)))
+        template.result(binding)
+      end
+
+      def static(file, &p)
+        File.read(File.join(Ground.root, file))
+      end
+
     end
   end
 end
