@@ -8,11 +8,8 @@ module Ground
       start_time = Time.now
       set_request Rack::Request.new(env)
 
-      puts request.inspect
-      puts request.env['HTTP_ACCEPT']
-      
       route, state = Ground::Locate(verb: request_method, path: path_info)
-      return non_found_state if state.nil?
+      return non_exist_route if state.nil?
 
       params = get_params route
       response = state << {request: request, params: params}
@@ -20,7 +17,7 @@ module Ground
       Ground::Log({
                     time:           time,
                     request_method: request_method,
-                    path_info:      path_info,
+                    path_info:      request.env['REQUEST_PATH'],
                     state:          state,
                     response:       response,
                     params:         params
@@ -52,8 +49,8 @@ module Ground
       HashWithDoubleAccess p.merge(request.params)
     end
 
-    def non_found_state
-      Rack::Response.new(["Not Found: #{request_method} #{path_info}"], 404)
+    def non_exist_route
+      Rack::Response.new(["Non Exist Route: #{request_method} #{path_info}"], 500)
     end
     
   end

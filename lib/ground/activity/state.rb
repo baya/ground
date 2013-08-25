@@ -38,6 +38,15 @@ module Ground
       @session ||= request.session
     end
 
+    # check Ground::MimeType for all mime type abb defined in ground
+    def request_accept?(mime_type_abb)
+      Ground::MimeType[request_accepts.first] == mime_type_abb
+    end
+
+    def request_accepts
+      @request_accepts ||= request.env['HTTP_ACCEPT'].split(', ')
+    end
+
   end
   
 end

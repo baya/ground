@@ -19,6 +19,10 @@ module Ground::Protocol
       html content, status
     end
 
+    def non_found(content)
+      response_as 404, content
+    end
+
     def forbid(content = nil)
       response_as 403, content
     end
