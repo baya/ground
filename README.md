@@ -55,6 +55,7 @@ Ground is a web framework, no controller, no model, no views and no mvc. Most of
   SiteIndex.path     # '/'
   Book::Index.path   # '/books'
   Book::Show.path(2) # '/book/2'
+  Book::Create.path  # '/book'
 ```
 
 ## sets
