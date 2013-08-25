@@ -7,6 +7,9 @@ module Ground
     def call(env)
       start_time = Time.now
       set_request Rack::Request.new(env)
+
+      puts request.inspect
+      puts request.env['HTTP_ACCEPT']
       
       route, state = Ground::Locate(verb: request_method, path: path_info)
       return non_found_state if state.nil?

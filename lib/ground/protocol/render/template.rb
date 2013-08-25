@@ -17,7 +17,7 @@ module Ground::Protocol
         template.result(binding)
       end
 
-      def static(file, &p)
+      def plain(file, &p)
         File.read(File.join(Ground.root, file))
       end
 
