@@ -27,6 +27,13 @@ Ground is a web framework, no controller, no model, no views and no mvc. Most of
 		html erb('views/book/show.html.erb')
 	  end
 	end
+
+    class Create < State
+	  def call
+	    @book = Book.create(params[:book])
+		rediret '/books'
+	  end
+	end
 	
   end
 ```
@@ -38,7 +45,16 @@ Ground is a web framework, no controller, no model, no views and no mvc. Most of
     get '/', SiteIndex
 	get '/books', Book::Index
 	get '/book/:id', Book::Show
+	post '/book', Book::Create
   end
+```
+
+## route helpers
+
+```ruby
+  SiteIndex.path     # '/'
+  Book::Index.path   # '/books'
+  Book::Show.path(2) # '/book/2'
 ```
 
 ## sets
@@ -51,6 +67,21 @@ Ground is a web framework, no controller, no model, no views and no mvc. Most of
 
   Ground.env #=> devlopment
   Ground.logger.info("debug+++")
+```
+
+## helpers
+
+```ruby
+  # Book::Index, Book::Show will hava instance method 'hello_ground'
+  Ground do
+    help Book::Index, Book::Show do
+	  
+	  def hello_ground
+	    'hello ground'
+	  end
+	  
+	end
+  end
 ```
 
 ## create a ground app
