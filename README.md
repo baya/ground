@@ -66,7 +66,7 @@ Ground is a web framework, no controller, no model, no views and no mvc. Most of
 	set :logger, ::Logger.new(STDOUT)
   en
 
-  Ground.env #=> devlopment
+  Ground.env #=> development
   Ground.logger.info("debug+++")
 ```
 
@@ -105,7 +105,7 @@ Ground is a web framework, no controller, no model, no views and no mvc. Most of
   run BookStore::App
 ```
 
-## Example Apps
+## Apps using ground
 
 ### [SceneMaster](https://github.com/baya/SceneMaster)
 ### [description](https://github.com/baya/description)
