@@ -19,11 +19,22 @@ module Ground
     def call(env)
       suffix = /\.(\w+)$/
       if env['PATH_INFO'].match(suffix)
-        env['PATH_INFO'] = env['PATH_INFO'].sub(suffix, '')
+        accept_type = suffix_to_accept_type $1
+        if accept_type
+          env['HTTP_ACCEPT'] = "#{accept_type}, #{env['HTTP_ACCEPT']}"
+          env['PATH_INFO'] = env['PATH_INFO'].sub(suffix, '')
+        end
       end
 
       @app.call(env)
 
+    end
+
+    private
+    
+    def suffix_to_accept_type(suffix)
+      accept = Ground::MimeType.detect {|_, v| v == suffix.to_sym}
+      accept[0] if accept
     end
     
   end

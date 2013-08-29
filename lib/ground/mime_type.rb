@@ -17,6 +17,7 @@ module Ground
     "application/rss+xml"      => :rss,   
     "application/atom+xml"     => :atom,  
     "application/json"         => :json, 
-    "text/x-json"              => :json
+    "text/x-json"              => :json,
+    "text/markdown"            => :md
   }
 end

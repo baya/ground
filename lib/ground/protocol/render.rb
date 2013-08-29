@@ -16,7 +16,7 @@ module Ground::Protocol
     end
 
     def text(content, status = 200)
-      html content, status
+      response_with(content, status, 'text/plain; charset=UTF-8')
     end
 
     def non_found(content)
