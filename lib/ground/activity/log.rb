@@ -21,7 +21,7 @@ module Ground
     private
 
     def logger
-      Ground.logger || ::Logger.new(STDOUT)
+      Ground.logger
     end
     
   end
