@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/ground.svg)](http://badge.fury.io/rb/ground)
+
 # Ground
 Ground is a web framework, no controller, no model, no views and no mvc. Most of the ground codes are inherited from
 [Dun::Activity](https://github.com/baya/dun/blob/master/lib/dun.rb). So ground is a high unified web framework.
@@ -13,7 +15,7 @@ Ground is a web framework, no controller, no model, no views and no mvc. Most of
 
   module Book
     State = Ground::State
-	
+
     class Index < State
 	  def call
 	    @books = Book.all
@@ -34,7 +36,7 @@ Ground is a web framework, no controller, no model, no views and no mvc. Most of
 		rediret '/books'
 	  end
 	end
-	
+
   end
 ```
 
@@ -76,11 +78,11 @@ Ground is a web framework, no controller, no model, no views and no mvc. Most of
   # Book::Index, Book::Show will hava instance method 'hello_ground'
   Ground do
     help Book::Index, Book::Show do
-	  
+
 	  def hello_ground
 	    'hello ground'
 	  end
-	  
+
 	end
   end
 ```
