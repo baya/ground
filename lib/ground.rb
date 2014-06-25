@@ -1,5 +1,6 @@
 require 'dun'
 require 'rack'
+require 'logger'
 require 'ground/activity'
 require 'ground/mime_type'
 require 'ground/protocol/render'
@@ -46,5 +47,7 @@ if not Kernel.method_defined?('Ground')
   end
 end
 
-
+Ground do
+  set :logger, ::Logger.new(STDOUT)
+end
 
