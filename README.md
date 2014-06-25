@@ -4,6 +4,14 @@
 Ground is a web framework, no controller, no model, no views and no mvc. Most of the ground codes are inherited from
 [Dun::Activity](https://github.com/baya/dun/blob/master/lib/dun.rb). So ground is a high unified web framework.
 
+## install
+
+`gem install ground`
+
+or in Gemfile:
+
+`gem 'ground'`
+
 ## states
 
 ```ruby
